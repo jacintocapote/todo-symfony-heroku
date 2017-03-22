@@ -1,3 +1,8 @@
 /**
  * Basic styles for homepage layout.
  */
+
+table .status1 {
+  text-decoration: line-through;
+  
+}

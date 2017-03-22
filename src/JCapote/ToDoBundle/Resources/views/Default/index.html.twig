@@ -14,22 +14,22 @@
 
       <div class="cover-container">
 
-        <div class="masthead clearfix">
-          <div class="inner">
-            <h3 class="masthead-brand">Cover</h3>
-            <nav class="nav nav-masthead">
-              <a class="nav-link active" href="#">Home</a>
-              <a class="nav-link" href="#">Features</a>
-              <a class="nav-link" href="#">Contact</a>
-            </nav>
-          </div>
-        </div>
-
         <div class="inner cover">
-          <h1 class="cover-heading">Cover your page.</h1>
-          <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+          <h1 class="cover-heading">ToDo example APP</h1>
+          <p class="lead">ToDo example App is a symfony application. This APP is a simple ToDo list. You can create/delete/edit items and mark as done.</p>
           <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+          {{form_start(form)}}
+          {{form_widget(form)}}
+          {{form_end(form)}}
+          <table class="table thead-inverse">
+            <tbody>
+             {% for item in item_list %}
+                <tr>
+                  <td scope="row" class="status{{item.status}}">{{item.text}}</td>
+                  <td><a href="todo/edit/{{item.id}}">Edit</a> | <a href="todo/complete/{{item.id}}">Completed</a> | <a href="todo/delete/{{item.id}}">Delete</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
           </p>
         </div>
 

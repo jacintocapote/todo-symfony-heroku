@@ -1,0 +1,16 @@
+JCapote\ToDoBundle\Entity\Item:
+    type: entity
+    table: null
+    repositoryClass: JCapote\ToDoBundle\Repository\ItemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: text
+        status:
+            type: boolean
+    lifecycleCallbacks: {  }
