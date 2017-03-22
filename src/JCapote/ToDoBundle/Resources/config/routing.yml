@@ -1,0 +1,3 @@
+jcapote_to_do_homepage:
+    path:     /
+    defaults: { _controller: JcapoteToDoBundle:Default:index }
