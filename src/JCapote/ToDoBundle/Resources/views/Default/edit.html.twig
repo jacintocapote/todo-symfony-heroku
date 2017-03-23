@@ -28,17 +28,6 @@
           {{form_start(form)}}
           {{form_widget(form)}}
           {{form_end(form)}}
-          <table class="table thead-inverse">
-            <tbody>
-             {% for item in item_list %}
-                <tr>
-                  <td scope="row" class="status{{item.status}}">{{item.text}}</td>
-                  <td><a title="Edit your to-do item" href="todo/edit/{{item.id}}"><span class="glyphicon glyphicon-pencil"></span></a> | {% if item.status %}<a title="Change status to uncompleted" href="todo/uncomplete/{{item.id}}"><span class="glyphicon glyphicon-ok-circle"></a>{% else %} <a title="Change status to completed" href="todo/complete/{{item.id}}"></span><span class="glyphicon glyphicon-ok-sign"></span></a> {% endif %} | <a title="Delete your to-do item" href="todo/delete/{{item.id}}"><span class="glyphicon glyphicon-remove-sign"></span></a></td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          </p>
         </div>
 
         <div class="mastfoot">

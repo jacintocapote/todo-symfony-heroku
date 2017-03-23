@@ -5,11 +5,23 @@ jcapote_to_do_homepage:
 jcapote_to_do_complete:
     path:     /todo/complete/{id}
     defaults: { _controller: JcapoteToDoBundle:Default:complete }
+    requirements:
+      id: ^[0-9_]+
 
 jcapote_to_do_uncomplete:
     path:     /todo/uncomplete/{id}
     defaults: { _controller: JcapoteToDoBundle:Default:uncomplete }
+    requirements:
+      id: ^[0-9_]+
 
 jcapote_to_do_delete:
     path:     /todo/delete/{id}
     defaults: { _controller: JcapoteToDoBundle:Default:delete }
+    requirements:
+      id: ^[0-9_]+
+
+jcapote_to_do_edit:
+    path:     /todo/edit/{id}
+    defaults: { _controller: JcapoteToDoBundle:Default:edit }
+    requirements:
+      id: ^[0-9_]+

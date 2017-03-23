@@ -51,42 +51,84 @@ class DefaultController extends Controller
     public function completeAction(Request $request, $id) {
         $sn = $this->getDoctrine()->getManager();
         $item = $sn->getRepository('JCapote\ToDoBundle\Entity\Item')->find($id);
-        $item->setStatus(TRUE);
-        $sn->flush();
+
+        if ($item) {
+            $item->setStatus(TRUE);
+            $sn->flush();
             
 
-        $this->addFlash(
-            'notice',
-            'Item was changed to completed'
-        );
+            $this->addFlash(
+                'notice',
+                'Item was changed to completed'
+            );
+        }
         return new RedirectResponse($this->generateUrl('homepage'));
     }
 
     public function uncompleteAction(Request $request, $id) {
         $sn = $this->getDoctrine()->getManager();
         $item = $sn->getRepository('JCapote\ToDoBundle\Entity\Item')->find($id);
-        $item->setStatus(FALSE);
-        $sn->flush();
+
+        if ($item) {
+            $item->setStatus(FALSE);
+            $sn->flush();
 
 
-        $this->addFlash(
-            'notice',
-            'Item was changed to uncompleted'
-        );
+            $this->addFlash(
+                'notice',
+                'Item was changed to uncompleted'
+            );
+        }
         return new RedirectResponse($this->generateUrl('homepage'));
     }
 
     public function deleteAction(Request $request, $id) {
         $sn = $this->getDoctrine()->getManager();
         $item = $sn->getRepository('JCapote\ToDoBundle\Entity\Item')->find($id);
-        $sn->remove($item);
-        $sn->flush();
+
+        if ($item) {
+            $sn->remove($item);
+            $sn->flush();
 
 
-        $this->addFlash(
-            'notice',
-            'Item was removed'
-        );
+            $this->addFlash(
+                'notice',
+                'Item was removed'
+            );
+        }
+        return new RedirectResponse($this->generateUrl('homepage'));
+    }
+
+    public function editAction(Request $request, $id) {
+        $sn = $this->getDoctrine()->getManager();
+        $item = $sn->getRepository('JCapote\ToDoBundle\Entity\Item')->find($id);
+
+        if ($item) {
+            $form = $this->createFormBuilder($item)
+            ->add('text', TextareaType::class, array('label' => 'Insert your text', 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+            ->add('Savie', SubmitType::class, array('label'=> 'Save Item', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')))
+            ->getForm();
+
+            $form->handleRequest($request);
+            if($form->isSubmitted() &&  $form->isValid()) {
+                $text = $form['text']->getData();
+                $item = $sn->getRepository('JCapote\ToDoBundle\Entity\Item')->find($id);
+
+                $item->setText($text);
+                $sn->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Item was edited'
+                );
+                return new RedirectResponse($this->generateUrl('homepage'));
+            }
+
+            return $this->render('JcapoteToDoBundle:Default:edit.html.twig', array(
+                'form' => $form->createView(),
+            ));
+        }
+
         return new RedirectResponse($this->generateUrl('homepage'));
     }
 
