@@ -1,69 +1,50 @@
-Symfony Standard Edition
+TO-DO APP example (Implemented with symfony 2.8)
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
 
 What's inside?
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+This a very basic APP TO-DO. Is to show as create a basic application with symfony 2.8 and integration with mysql.
 
-  * An AppBundle you can use to start coding;
 
-  * Twig as the only configured template engine;
+How use on local?
+----------------
 
-  * Doctrine ORM/DBAL;
+The steps to use on local is:
+  * Clone repository.
+  * Execute composer install.
+  * Alter file /app/config/paramaters.yml with your database connection.
+  * Execute `php app/console doctrine:database:create`
+  * Execute `php app/console doctrine:schema:update --force`
+  * Execute `php bin/console server:run` and you can see the app.
 
-  * Swiftmailer;
+How deploy to heroku?
+---------------------
 
-  * Annotations enabled for everything.
+To use this example into heroku you need to do:
+  * Clone repo yo your local.
+  * `heroku login`
+  * `heroku create`
+  * `git push heroku master`
+  * `heroku addons:add cleardb:ignite` to allow mysql database into heroku.
+  * `heroku config:set SECRET=your_token` use a token id for heroku.
+  * `git push heroku master` you probably get some errors because you need to create database.
+  * `heroku run php app/console doctrine:database:create`
+  * `heroku run php app/console doctrine:schema:update --force`
+  * `heroku open` and you have your app into heroku.
 
-It comes pre-configured with the following bundles:
 
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+You can check a example https://jacinto-todo.herokuapp.com/
 
 Enjoy!
 
-[1]:  https://symfony.com/doc/2.8/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/doctrine.html
-[8]:  https://symfony.com/doc/2.8/templating.html
-[9]:  https://symfony.com/doc/2.8/security.html
-[10]: https://symfony.com/doc/2.8/email.html
-[11]: https://symfony.com/doc/2.8/logging.html
-[12]: https://symfony.com/doc/2.8/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+[1]: https://symfony.com/doc/2.8/setup.html
+[2]: https://symfony.com/doc/2.8/doctrine.html
+[3]: https://symfony.com/doc/2.8/security.html
+[4]: https://symfony.com/doc/2.8/email.html
+[5]: https://symfony.com/doc/2.8/logging.html
+[6]: https://symfony.com/doc/2.8/assetic/asset_management.html
+[7]: https://devcenter.heroku.com/articles/getting-started-with-symfony
+[8]: http://getbootstrap.com
+[9]: https://coderwall.com/p/qpitzq/deploing-symfony-project-using-mysql-to-heroku
