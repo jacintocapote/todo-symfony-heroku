@@ -17,6 +17,13 @@
         <div class="inner cover">
           <h1 class="cover-heading">ToDo example APP</h1>
           <p class="lead">ToDo example App is a symfony application. This APP is a simple ToDo list. You can create/delete/edit items and mark as done.</p>
+          {% for info_message in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success">{{info_message}}</div>
+          {% endfor %} 
+     
+          {% for error_message in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">{{error_message}}</div>
+          {% endfor %}
           <p class="lead">
           {{form_start(form)}}
           {{form_widget(form)}}
@@ -26,7 +33,7 @@
              {% for item in item_list %}
                 <tr>
                   <td scope="row" class="status{{item.status}}">{{item.text}}</td>
-                  <td><a href="todo/edit/{{item.id}}">Edit</a> | <a href="todo/complete/{{item.id}}">Completed</a> | <a href="todo/delete/{{item.id}}">Delete</a></td>
+                  <td><a title="Edit your to-do item" href="todo/edit/{{item.id}}"><span class="glyphicon glyphicon-pencil"></span></a> | {% if item.status %}<a title="Change status to uncompleted" href="todo/uncomplete/{{item.id}}"><span class="glyphicon glyphicon-ok-circle"></a>{% else %} <a title="Change status to completed" href="todo/complete/{{item.id}}"></span><span class="glyphicon glyphicon-ok-sign"></span></a> {% endif %} | <a title="Delete your to-do item" href="todo/delete/{{item.id}}"><span class="glyphicon glyphicon-remove-sign"></span></a></td>
                 </tr>
               {% endfor %}
             </tbody>
